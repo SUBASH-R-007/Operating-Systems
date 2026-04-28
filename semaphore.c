@@ -136,4 +136,4 @@ int main()
 
 // Destroy the semaphores to free system resources.
 
-// Terminate.
+// Terminate

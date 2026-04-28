@@ -1,3 +1,41 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+    printf("Enter number of processes: \n");
+    scanf("%d", &n);
+
+    int at[n], bt[n], ct[n], tat[n], wt[n];
+
+    for (int i = 0; i < n; i++) {
+        printf("Enter Arrival Time and Burst Time for P%d: \n", i + 1);
+        scanf("%d %d", &at[i], &bt[i]);
+    }
+
+    // Calculate Completion Time
+    ct[0] = at[0] + bt[0];
+    for (int i = 1; i < n; i++) {
+        if (ct[i-1] < at[i])
+            ct[i] = at[i] + bt[i];
+        else
+            ct[i] = ct[i-1] + bt[i];
+    }
+
+    float totalTAT = 0, totalWT = 0;
+
+    for (int i = 0; i < n; i++) {
+        tat[i] = ct[i] - at[i];
+        wt[i] = tat[i] - bt[i];
+        totalTAT += tat[i];
+        totalWT += wt[i];
+    }
+
+    printf("\nAverage Turnaround Time: %.2f\n", totalTAT / n);
+    printf("Average Waiting Time: %.2f\n", totalWT / n);
+
+    return 0;
+}
+
 // Step 1: Start
 // Initialize the program and declare arrays to store Arrival Time (AT), Burst Time (BT), Completion Time (CT), Turnaround Time (TAT), and Waiting Time (WT) for n processes.
 
@@ -39,7 +77,7 @@
 
 // Calculate Waiting Time: WT[i] = TAT[i] - BT[i]
 
-// Add to totals:
+// Add to totals
 
 // totalTAT = totalTAT + TAT[i]
 
@@ -58,41 +96,3 @@
 // Step 7: Stop
 
 // Terminate the algorithm.
-
-#include <stdio.h>
-
-int main() {
-    int n;
-    printf("Enter number of processes: \n");
-    scanf("%d", &n);
-
-    int at[n], bt[n], ct[n], tat[n], wt[n];
-
-    for (int i = 0; i < n; i++) {
-        printf("Enter Arrival Time and Burst Time for P%d: \n", i + 1);
-        scanf("%d %d", &at[i], &bt[i]);
-    }
-
-    // Calculate Completion Time
-    ct[0] = at[0] + bt[0];
-    for (int i = 1; i < n; i++) {
-        if (ct[i-1] < at[i])
-            ct[i] = at[i] + bt[i];
-        else
-            ct[i] = ct[i-1] + bt[i];
-    }
-
-    float totalTAT = 0, totalWT = 0;
-
-    for (int i = 0; i < n; i++) {
-        tat[i] = ct[i] - at[i];
-        wt[i] = tat[i] - bt[i];
-        totalTAT += tat[i];
-        totalWT += wt[i];
-    }
-
-    printf("\nAverage Turnaround Time: %.2f\n", totalTAT / n);
-    printf("Average Waiting Time: %.2f\n", totalWT / n);
-
-    return 0;
-}
