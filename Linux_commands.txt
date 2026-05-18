@@ -1,0 +1,284 @@
+ls ---> used to list files and dirs
+
+ls -l  --> list files and dirs with long format
+
+touch test1 ---> used to create empty file
+
+ls -lt ---> recently created files will be displayed at begining
+
+ls -lrt --> recently created files will be displayed at the end
+
+pwd ---> present working directory
+
+ls -a --> used to display hidden files (a means all files)
+
+---------------------------------------------------------------------------------------
+
+mkdir dirname ----> create dir
+
+cd dirname ----> change directory
+
+cd dir/dir2/
+
+cd ..  --> used to come out of directory
+
+cd ../../.. ---> 
+
+mkdir -p temp1/temp2/temp3   ---> create complete directory structure 
+---------------------------------------------------------------------------------
+cat filename ---> used to check content of a file
+========================================================================================
+vi is used to edit file 
+
+vi filename
+
+esc --> i ---> insert 
+
+esc --> :wq! ---> save content of a file (write and quit )
+
+esc ---> :q! --> quit without saving content 
+
+how do replace aprticular string or word in a file?
+
+esc :%s/current-string/new-string/g
+esc :%s/linux/windows/g
+-------------------------------------------------------
+
+Need to replace only in 4th line
+
+esc:4s/linux/windows/g
+---------------------------------------------------------
+need to replace from 2nd to 4th line
+esc:2,4s/linux/windows/g
+
+-----------------------------------------------------------------
+
+how do you replace from 2nd line to end of a file 
+
+esc:2,$s/linux/windows/g
+----------------------------------------------------------------
+how do set line numbers 
+
+esc : set nu --> set line numbers
+
+esc : set nonu ---> remove line number
+
+--------------------------------------------------
+need to move cursor to particular line
+
+esc :line_number
+esc : 4 ---> cursor will move to 4th line
+
+----------------------------------------------------------------------------- 
+
+delete particular line in vi 
+
+esc press dd
+---------------------------------------------------------------------
+
+---------------------------------------------------------------------
+==========================================================================================
+cp is used to copy file
+
+cp file1 file2  ----> file1 will be copied to file2
+-------------------------------------------------------------------------
+
+cp test1 temp1/temp2/temp3/
+----------------------------------------------------------------------
+copy dir to another dir
+
+cp -r dir1 dir2
+----------------------------------------------------------------------
+ cp test1 file1 test3 temp  ---> copy multiple files or dirs to another dir
+---------------------------------------------------------------------------------
+
+how do rename file or dir?
+
+mv file1 file2
+--------------------------------------------------------
+mv file1 dir2
+-------------------------------------------------------
+mv file1 file2 file3 dir1  ---> move multiple files to directory
+
+install tree command 
+sudo yum install tree
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+rwxr-xr--
+7   5  4
+
+chmod is used to change permission of a file or dir
+
+chmod 777 filename
+---------------------------------------------------------------------
+
+chmod -R 777 dir
+
+all subdirectories and files permission will be changed to 777
+----------------------------------------------------------------------------------------
+
+---------------------------------------------------------
+u--> user, g--> group and o--> others
+
+chmod u+rwx filename
+
+--------------------------------------------------------------------------------------- 
+
+chown --> used change ownership of a file or a dir
+
+chown newowner filename
+---------------------------------------------
+if new onwer belongs to different group 
+
+chown newonwer:groupname filename 
+
+------------------------------------------------------------------------------------
+df -h . ----> used to check disk size
+
+. indicates present disk
+-------------------------------------------------------------
+du -sh filename (disk usage)
+
+used to check size of a file 
+
+du -sh *  ---> all files and dirs size in present directory
+
+------------------------------------------------------------------- 
+echo "hi how r u"  is used to print 
+
+ echo -e "hi\nhow r u"
+----------------------------------------------------------------------------
+> (redirect)
+
+used to store output of a command to file
+
+ls -lrt > log
+---------------------------------------------------------------------------
+>> (append)
+used to attach output of a command to end of a file 
+
+echo "this is linux class" >> log
+================================================================================================
+===============================================================
+wc filename
+
+lines words chars filename
+
+wc -l log  ---> number of lines 
+wc -w log  ---> words
+wc -c log  --> chars
+--------------------------------------------------------------------------
+"head" is used to display 1st portion of a file
+
+head -3 filename  ---> 1st 3 lines
+
+head -12 filename ---> 1st 12 lines of a file
+head filename ---> 10 lines by default
+-------------------------------------------------------------------------
+tail is used to display last portion of a file
+
+tail -3 filename  --> last 3 lines 
+
+tail -5 filename  ----> last 5 lines 
+
+tail filename -----> last 10lines by default
+----------------------------------------------------------------------------
+
+| (pipe) is used to give output of one command as input to next command 
+
+ls -lrt | wc -l 
+
+------------------------------------------------------------
+
+ head -4 log | tail -1  --> display 4th line
+---------------------------------------------------------------
+how do you display 99th line of a file
+
+head -99 file | tail -1
+
+--------------------------------------------------
+display 4th to 7th line
+
+head -7 file | tail -3
+
+---------------------------------------------------------------------
+
+count number of words in 99th line of a file
+
+head -99 log | tail -1 | wc -w
+-----------------------------------------------------------------------------
+
+display 2nd last line of a file
+
+tail -2 log | head -1
+
+Assignment:
+Go through free command. get all options in "free" command 
+=================================================================================
+grep --> pattern search 
+
+used to search string in file
+
+grep "pattern" filename
+
+grep -w "string" filename  ----> search only specified word 
+
+grep -i "Linux" test_1   ---> i --> case insensitive 
+
+how do you search multiple pattern?
+
+grep -e "linux" -e "windows" test_1
+
+or 
+egrep 
+
+how do you list filenames if files have particular word or string
+
+grep -R -l "linux" * 
+
+
+how do you prnt lines which don't have specified pattern
+grep -v "linux" test_1
+
+list lines if starts with particular pattern
+
+0grep "^pattern" filename
+
+grep "s$" test_1  ---> list lines ends with particular pattern 
+
+get command to print lines which start with "M" and ends with "s"
+
+grep -c "linux" test_1  ---> count number lines which have specified pattern0
+---------------------------------------------------------------------------------------------------------------
+
+how do you replace string in a file?
+
+sed --> used to replace string in a file
+sed 's/linux/unix/g' filename
+
+sed -i 's/linux/unix/g' test_1
+
+sed '4s/linux/unix/g'  ---> replace string in 4th line only
+
+sed '2,6s/linux/unix/g' ---> from 2nd to 6th line
+
+sed '$s/linux/unix/g'  ---> replace string only in the last line
+
+delete particular line
+
+sed '4d' test_1  --> delete 4th line of a file
+
+sed '$d' test_1  --> delete last line
+
+sed '2,6d' test_1  --> delete 2nd to 6th line
+
+sed '1d;3d' test_1
+
+how do you print particular line?
+sed -n '3p' test_1  ---> print 3rd line
+
+sed -n '$p' test_1  ---> print last line
+
+sed -n '2,6p' test_1  ---> print 2nd to 6th line
+
+sed -n '2p;6p' test_1  ---> print 2nd to 6th line
