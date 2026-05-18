@@ -59,7 +59,30 @@ int main() {
                     work[j] += alloc[i][j];
 
                 safe_seq[count++] = i;
+                finish[i] = 1;
+                found = 1;
+            }
+        }
+
+        // No process could be allocated — unsafe state
+        if (!found) break;
+    }
+
+    if (count == n) {
+        printf("System is in a SAFE STATE.\n");
+        printf("Safe Sequence: ");
+        for (int i = 0; i < n; i++) {
+            printf("P%d", safe_seq[i]);
+            if (i < n - 1) printf(" ");
+        }
+        printf("\n");
+    } else {
+        printf("System is NOT in a safe state (Deadlock may occur).\n");
+    }
+
+    return 0;
 }
+
 // Step 1: Input and Initialize
 
 // Read the Allocation matrix (Alloc), Maximum requirement matrix (Max), and Available resources array (Avail).
